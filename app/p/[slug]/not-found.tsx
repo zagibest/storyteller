@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { ArrowLeft, BookOpen, Home } from "lucide-react";
+import Link from "next/link";
 
 export default function PostNotFound() {
   return (
@@ -19,8 +19,8 @@ export default function PostNotFound() {
               Story Not Found
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              The story you're looking for doesn't exist or may have been
-              removed. It might be lost in the digital realm.
+              The story you&apos;re looking for doesn&apos;t exist or may have
+              been removed. It might be lost in the digital realm.
             </p>
           </div>
 

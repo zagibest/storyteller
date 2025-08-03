@@ -1,5 +1,5 @@
+import { Home, Search } from "lucide-react";
 import Link from "next/link";
-import { ArrowLeft, Home, Search } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -19,8 +19,8 @@ export default function NotFound() {
               Page Not Found
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              The story you're looking for doesn't exist or has been moved to
-              another realm.
+              The page you&apos;re looking for doesn&apos;t exist or has been
+              moved to another realm.
             </p>
           </div>
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { AlertTriangle, Home, RefreshCw } from "lucide-react";
 import Link from "next/link";
-import { AlertTriangle, RefreshCw, Home } from "lucide-react";
+import { useEffect } from "react";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -32,8 +32,8 @@ export default function Error({ error, reset }: ErrorProps) {
               Something Went Wrong
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              We encountered an unexpected error while loading your story. Don't
-              worry, it's not your fault!
+              We encountered an unexpected error while loading your story.
+              Don&apos;t worry, it&apos;s not your fault!
             </p>
 
             {/* Error Details (only in development) */}
