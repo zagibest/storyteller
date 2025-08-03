@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -119,4 +120,93 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer components {
+  /* Enhanced typography for storytelling */
+  .story-prose {
+    @apply prose prose-lg max-w-none;
+  }
+
+  .story-prose h1 {
+    @apply font-serif text-4xl font-bold text-foreground mb-8 mt-12;
+  }
+
+  .story-prose h2 {
+    @apply font-serif text-3xl font-semibold text-foreground mb-6 mt-10;
+  }
+
+  .story-prose h3 {
+    @apply font-serif text-2xl font-medium text-foreground mb-4 mt-8;
+  }
+
+  .story-prose p {
+    @apply text-muted-foreground leading-relaxed text-lg mb-6;
+  }
+
+  .story-prose p:first-of-type::first-letter {
+    @apply text-6xl font-serif float-left mr-3 mt-2 text-primary leading-none;
+  }
+
+  .story-prose blockquote {
+    @apply border-l-4 border-primary/30 bg-muted/30 pl-6 py-4 rounded-r-lg text-foreground font-medium italic;
+  }
+
+  .story-prose strong {
+    @apply text-foreground font-semibold;
+  }
+
+  .story-prose em {
+    @apply text-foreground italic;
+  }
+
+  .story-prose a {
+    @apply text-primary no-underline hover:underline transition-colors;
+  }
+
+  .story-prose img {
+    @apply rounded-lg shadow-lg my-8;
+  }
+
+  .story-prose code {
+    @apply bg-muted text-foreground px-2 py-1 rounded text-sm;
+  }
+
+  .story-prose pre {
+    @apply bg-muted border border-border rounded-lg p-4 overflow-x-auto;
+  }
+
+  .story-prose ul,
+  .story-prose ol {
+    @apply space-y-2;
+  }
+
+  .story-prose li {
+    @apply text-muted-foreground;
+  }
+
+  /* Hero section enhancements */
+  .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--muted) / 0.1) 50%,
+      hsl(var(--background)) 100%
+    );
+  }
+
+  /* Decorative elements */
+  .story-divider {
+    @apply relative;
+  }
+
+  .story-divider::after {
+    content: "";
+    @apply absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent;
+  }
+}
+
+#cusdis_thread {
+  display: flex;
+  height: 40em;
 }

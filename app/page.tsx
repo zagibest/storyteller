@@ -1,5 +1,4 @@
 import FeaturedCard from "@/components/featured";
-import Header from "@/components/header";
 import PostCard from "@/components/post_card";
 import { fetchPages, getFeaturedPage } from "@/lib/notion";
 
@@ -8,8 +7,6 @@ export default async function Home() {
   const featuredPage = getFeaturedPage(pages);
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-
       <main className="container mx-auto px-4 py-8">
         {featuredPage && (
           <section className="mb-16">
