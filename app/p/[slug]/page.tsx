@@ -8,7 +8,16 @@ import {
 import { NotionRenderer } from "@notion-render/client";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  User,
+  MapPin,
+  Heart,
+  Share2,
+  Bookmark,
+} from "lucide-react";
 import Link from "next/link";
 
 dayjs.extend(relativeTime);
@@ -23,20 +32,24 @@ export default async function Page({
 
   if (!page) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center hero-gradient">
         <div className="text-center">
-          <h1 className="text-4xl font-serif text-muted-foreground mb-4">
-            Page Not Found
+          <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Heart className="w-10 h-10 text-primary" />
+          </div>
+          <h1 className="text-4xl font-serif text-foreground mb-4">
+            Түүх олдсонгүй
           </h1>
-          <p className="text-muted-foreground mb-8">
-            The story you&apos;re looking for doesn&apos;t exist.
+          <p className="text-muted-foreground mb-8 max-w-md">
+            Таны хайж буй түүх одоогоор бичигдээгүй байна. Бусад түүхүүдийг
+            уншаарай.
           </p>
           <Link
             href="/"
-            className="inline-flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors"
+            className="steppe-button inline-flex items-center space-x-2"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Return Home</span>
+            <span>Нүүр хуудас руу буцах</span>
           </Link>
         </div>
       </div>
@@ -60,30 +73,32 @@ export default async function Page({
   const publishedDate = new Date(transformedPage.created_time);
 
   return (
-    <article className="min-h-screen hero-gradient">
+    <article className="min-h-screen hero-gradient ">
       {/* Hero Section */}
       <div className="relative">
-        <div className="relative container mx-auto px-4 py-16 ">
+        <div className="relative container mx-auto px-4 py-16">
           <Link
             href="/"
             className="inline-flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors mb-8 group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="font-medium">Back to Stories</span>
+            <span className="font-medium">Бүх түүхүүд рүү буцах</span>
           </Link>
 
           <div className="space-y-6">
             {/* Category/Status Badge */}
-            {/* <div className="flex items-center space-x-4">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                {transformedPage.status}
-              </span>
+            <div className="flex items-center space-x-4">
+              <div className="earth-accent px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
+                <MapPin className="w-4 h-4" />
+                <span>Хөдөөний түүх</span>
+              </div>
               {transformedPage.featured && (
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-600 border border-yellow-500/20">
-                  Featured Story
-                </span>
+                <div className="sky-accent px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
+                  <Heart className="w-4 h-4" />
+                  <span>Онцлох түүх</span>
+                </div>
               )}
-            </div> */}
+            </div>
 
             {/* Title */}
             <h1 className="text-4xl md:text-6xl font-serif font-bold text-foreground leading-tight">
@@ -92,7 +107,7 @@ export default async function Page({
 
             {/* Short Description */}
             {transformedPage.short_description && (
-              <p className="text-xl text-muted-foreground leading-relaxed ">
+              <p className="text-xl text-muted-foreground leading-relaxed">
                 {transformedPage.short_description}
               </p>
             )}
@@ -100,8 +115,10 @@ export default async function Page({
             {/* Metadata */}
             <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground border-t border-border/50 pt-6">
               <div className="flex items-center space-x-2">
-                <User className="w-4 h-4" />
-                <span>{transformedPage.author || "Anonymous"}</span>
+                <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center">
+                  <User className="w-3 h-3 text-primary" />
+                </div>
+                <span>{transformedPage.author || "Хөдөөний хүн"}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Calendar className="w-4 h-4" />
@@ -109,7 +126,7 @@ export default async function Page({
               </div>
               <div className="flex items-center space-x-2">
                 <Clock className="w-4 h-4" />
-                <span>{readingTime} мин</span>
+                <span>{readingTime} мин уншина</span>
               </div>
             </div>
           </div>
@@ -117,12 +134,12 @@ export default async function Page({
       </div>
 
       {/* Content Section */}
-      <div className="container mx-auto px-4 ">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
           {/* Main Content */}
           <div className="lg:col-span-3">
             <div
-              className="story-prose"
+              className="story-prose "
               dangerouslySetInnerHTML={{ __html: html }}
             />
           </div>
@@ -130,22 +147,19 @@ export default async function Page({
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-8">
-              {/* Story Details */}
-              <div className="bg-card border border-border rounded-lg p-6">
+              <div className="mongolian-card p-6">
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
-                  Нийтлэлийн тухай
+                  Түүхийн мэдээлэл
                 </h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Нийтлэгч</span>
+                    <span className="text-muted-foreground">Түүхч</span>
                     <span className="font-medium">
-                      {transformedPage.author || "Anonymous"}
+                      {transformedPage.author || "Хөдөөний хүн"}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      Нийтэлсэн огноо
-                    </span>
+                    <span className="text-muted-foreground">Бичсэн огноо</span>
                     <span className="font-medium">
                       {publishedDate.toLocaleDateString()}
                     </span>
@@ -160,64 +174,45 @@ export default async function Page({
                       {wordCount.toLocaleString()}
                     </span>
                   </div>
-                  {/* <div className="flex justify-between">
-                    <span className="text-muted-foreground">Status</span>
-                    <span className="font-medium capitalize">
-                      {transformedPage.status}
-                    </span>
-                  </div> */}
                 </div>
               </div>
 
-              {/* Share */}
-              <div className="bg-card border border-border rounded-lg p-6">
+              <div className="mongolian-card p-6">
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
                   Хуваалцах
                 </h3>
                 <div className="flex space-x-3">
-                  <button
-                    className="flex-1 bg-primary text-primary-foreground py-2 px-4 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors"
-                    // onClick={() => {
-                    //   navigator.clipboard.writeText(window.location.href);
-                    //   toast("Линкийг хууллаа");
-                    // }}
-                  >
+                  <button className="flex-1 steppe-button text-sm">
+                    <Share2 className="w-4 h-4 mr-2" />
                     Share
                   </button>
-                  <button
-                    className="flex-1 bg-muted text-muted-foreground py-2 px-4 rounded-md text-sm font-medium hover:bg-muted/80 transition-colors"
-                    // onClick={() => {
-                    //   const isMac =
-                    //     navigator.platform.toUpperCase().indexOf("MAC") >= 0;
-                    //   const shortcut = isMac ? "Cmd+D" : "Ctrl+D";
-
-                    //   toast(`${shortcut} дарж хадгалаарай`);
-                    // }}
-                  >
+                  <button className="flex-1 bg-muted text-muted-foreground py-2 px-4 rounded-lg text-sm font-medium hover:bg-muted/80 transition-colors">
+                    <Bookmark className="w-4 h-4 mr-2" />
                     Bookmark
                   </button>
                 </div>
               </div>
 
-              {/* Related Stories Placeholder */}
-              <div className="bg-card border border-border rounded-lg p-6">
+              <div className="mongolian-card p-6">
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
-                  More Stories
+                  Бусад түүхүүд
                 </h3>
-                <p className="text-sm text-muted-foreground">
-                  Discover more captivating tales from our collection.
+                <p className="text-sm text-muted-foreground mb-4">
+                  Хөдөөний хүний амьдралын бусад түүхүүдийг уншаарай.
                 </p>
                 <Link
                   href="/"
-                  className="inline-block mt-4 text-primary hover:text-primary/80 transition-colors font-medium"
+                  className="inline-block text-primary hover:text-primary/80 transition-colors font-medium flex items-center space-x-2 group"
                 >
-                  Browse All Stories →
+                  <span>Бүх түүхүүд</span>
+                  <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform rotate-180" />
                 </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div className="w-full border-t border-border/40 container mx-auto px-4 my-8" />
       <CommentSection
         attrs={{
