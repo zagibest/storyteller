@@ -1,0 +1,83 @@
+{
+  "common": {
+    "allStories": "All Stories",
+    "readMore": "Read More",
+    "backToHome": "Back to Home",
+    "loading": "Loading...",
+    "notFound": "Not Found",
+    "pageNotFound": "Page Not Found",
+    "goHome": "Go Home",
+    "language": "Language",
+    "featuredStory": "Featured Story"
+  },
+  "home": {
+    "title": "All Stories",
+    "subtitle": "Stories of rural life",
+    "allStoriesLink": "All Stories",
+    "featuredSection": "Featured Stories"
+  },
+  "navigation": {
+    "home": "Home",
+    "stories": "Stories",
+    "about": "About"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "description": "Documenting rural life in Mongolia, preserving stories of rural people."
+  },
+  "loading": {
+    "title": "Loading Stories...",
+    "subtitle": "Discovering rural tales from Mongolia"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "subtitle": "We encountered an error while loading the content.",
+    "retry": "Try Again"
+  },
+  "notFound": {
+    "title": "Story Not Found",
+    "subtitle": "The story you're looking for doesn't exist or has been moved.",
+    "backHome": "Back to Home"
+  },
+  "about": {
+    "title": "Our Story",
+    "subtitle": "From our website 'STORY TELLERS', we believe that every corner of Mongolia holds unique tales waiting to be told.",
+    "content": "We are students dedicated to exploring and documenting the rich narratives that emerge from rural communities across our beautiful country. Through this project, we aim to bridge the gap between urban and rural experiences, sharing authentic stories that reflect the true spirit of Mongolia.",
+    "mission": "Through this project, we document rural life in Mongolia, preserving the stories of 'Rural People'. We are 7 rural students from 7 provinces writing the stories of our families and friends.",
+    "ourTeam": "Story Tellers",
+    "teamMembers": [
+      {
+        "name": "Cami Brix",
+        "role": "Analyst"
+      },
+      {
+        "name": "Noah Duncan",
+        "role": "Senior Analyst"
+      },
+      {
+        "name": "Kali Finkhbayar",
+        "role": "Analyst"
+      },
+      {
+        "name": "Devin Haas",
+        "role": "Analyst"
+      },
+      {
+        "name": "Hana Horiuchi",
+        "role": "Analyst"
+      },
+      {
+        "name": "Davis Johnstone",
+        "role": "Analyst"
+      },
+      {
+        "name": "Ben Klutsky",
+        "role": "Analyst"
+      },
+      {
+        "name": "Catherine Lavity",
+        "role": "Analyst"
+      }
+    ]
+  }
+}

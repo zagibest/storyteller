@@ -3,7 +3,7 @@ export default function Loading() {
     <article className="min-h-screen hero-gradient">
       {/* Hero Section Skeleton */}
       <div className="relative">
-        <div className="relative container mx-auto px-4 py-16">
+        <div className="relative container mx-auto px-4 py-16 mt-48">
           {/* Back Button Skeleton */}
           <div className="flex items-center space-x-2 mb-8">
             <div className="w-4 h-4 bg-muted rounded"></div>

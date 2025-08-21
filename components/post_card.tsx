@@ -1,3 +1,5 @@
+import { type Dictionary } from "@/lib/dictionaries";
+import { getLocalePath, type Locale } from "@/lib/i18n";
 import { transformPage } from "@/lib/notion";
 import { shimmer, toBase64 } from "@/lib/utils";
 import { PageObjectResponse } from "@notionhq/client";
@@ -6,11 +8,21 @@ import { ArrowRight, Clock, MapPin, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const PostCard = ({ page }: { page: PageObjectResponse }) => {
+interface PostCardProps {
+  page: PageObjectResponse;
+  locale: Locale;
+  dict: Dictionary;
+}
+
+const PostCard = ({ page, locale, dict }: PostCardProps) => {
   const transformedPage = transformPage(page);
+
+  const defaultAuthor = locale === "en" ? "Rural Person" : "Хөдөөний хүн";
+  const readMoreText = locale === "en" ? "Read" : "Унших";
+
   return (
     <Link
-      href={`/p/${transformedPage.slug}`}
+      href={getLocalePath(locale, `p/${transformedPage.slug}`)}
       className="mongolian-card p-6 group flex flex-col justify-between h-full hover:transform hover:-translate-y-1 transition-all duration-300 backdrop-blur-lg"
     >
       <article>
@@ -31,7 +43,7 @@ const PostCard = ({ page }: { page: PageObjectResponse }) => {
         <div className="flex items-center space-x-3 mb-3">
           <div className="flex items-center space-x-1 text-xs text-muted-foreground">
             <MapPin className="w-3 h-3" />
-            <span>Хөдөө</span>
+            <span>{transformedPage.province}</span>
           </div>
           <div className="flex items-center space-x-1 text-xs text-muted-foreground">
             <Clock className="w-3 h-3" />
@@ -53,11 +65,11 @@ const PostCard = ({ page }: { page: PageObjectResponse }) => {
             <User className="w-3 h-3 text-primary" />
           </div>
           <span className="text-muted-foreground text-xs font-medium">
-            {transformedPage.author || "Хөдөөний хүн"}
+            {transformedPage.author || defaultAuthor}
           </span>
         </div>
         <button className="text-primary hover:text-primary/80 text-sm font-medium transition-colors flex items-center gap-2 group">
-          <span>Унших</span>
+          <span>{readMoreText}</span>
           <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>

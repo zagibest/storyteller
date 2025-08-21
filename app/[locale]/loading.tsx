@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
     <div className="min-h-screen bg-background">
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 mt-24">
         {/* Featured Card Skeleton */}
         <section className="mb-16">
           <div className="bg-card rounded-2xl p-8 border border-border/50 animate-pulse">

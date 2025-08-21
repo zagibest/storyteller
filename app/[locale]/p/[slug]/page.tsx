@@ -1,4 +1,6 @@
 import { CommentSection } from "@/components/comment_section";
+import { getDictionary } from "@/lib/dictionaries";
+import { getLocalePath, type Locale } from "@/lib/i18n";
 import {
   fetchBySlug,
   fetchPageBlocks,
@@ -25,9 +27,10 @@ dayjs.extend(relativeTime);
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: Locale }>;
 }) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
+  const dict = await getDictionary(locale);
   const page = await fetchBySlug(slug);
 
   if (!page) {
@@ -38,18 +41,17 @@ export default async function Page({
             <Heart className="w-10 h-10 text-primary" />
           </div>
           <h1 className="text-4xl font-serif text-foreground mb-4">
-            Түүх олдсонгүй
+            {dict.notFound.title}
           </h1>
           <p className="text-muted-foreground mb-8 max-w-md">
-            Таны хайж буй түүх одоогоор бичигдээгүй байна. Бусад түүхүүдийг
-            уншаарай.
+            {dict.notFound.subtitle}
           </p>
           <Link
-            href="/"
+            href={getLocalePath(locale)}
             className="steppe-button inline-flex items-center space-x-2"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Нүүр хуудас руу буцах</span>
+            <span>{dict.notFound.backHome}</span>
           </Link>
         </div>
       </div>
@@ -72,17 +74,57 @@ export default async function Page({
   // Format dates
   const publishedDate = new Date(transformedPage.created_time);
 
+  // Translations
+  const content = {
+    en: {
+      backToStories: "Back to all stories",
+      ruralStory: "Rural Story",
+      featuredStory: "Featured Story",
+      ruralPerson: "Rural Person",
+      minRead: "min read",
+      storyInfo: "Story Information",
+      storyteller: "Storyteller",
+      publishedDate: "Published Date",
+      readingTime: "Reading Time",
+      wordCount: "Word Count",
+      share: "Share",
+      bookmark: "Bookmark",
+      otherStories: "Other Stories",
+      otherStoriesDesc: "Read other stories about rural life.",
+      allStories: "All Stories",
+    },
+    mn: {
+      backToStories: "Бүх түүхүүд рүү буцах",
+      ruralStory: "Хөдөөний түүх",
+      featuredStory: "Онцлох түүх",
+      ruralPerson: "Хөдөөний хүн",
+      minRead: "мин уншина",
+      storyInfo: "Түүхийн мэдээлэл",
+      storyteller: "Түүхч",
+      publishedDate: "Бичсэн огноо",
+      readingTime: "Унших хугацаа",
+      wordCount: "Үгийн тоо",
+      share: "Хуваалцах",
+      bookmark: "Bookmark",
+      otherStories: "Бусад түүхүүд",
+      otherStoriesDesc: "Хөдөөний хүний амьдралын бусад түүхүүдийг уншаарай.",
+      allStories: "Бүх түүхүүд",
+    },
+  };
+
+  const text = content[locale] || content.mn;
+
   return (
     <article className="min-h-screen hero-gradient ">
       {/* Hero Section */}
       <div className="relative">
-        <div className="relative container mx-auto px-4 py-16">
+        <div className="relative container mx-auto px-4 py-16 mt-24">
           <Link
-            href="/"
+            href={getLocalePath(locale)}
             className="inline-flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors mb-8 group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="font-medium">Бүх түүхүүд рүү буцах</span>
+            <span className="font-medium">{text.backToStories}</span>
           </Link>
 
           <div className="space-y-6">
@@ -90,12 +132,12 @@ export default async function Page({
             <div className="flex items-center space-x-4">
               <div className="earth-accent px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
                 <MapPin className="w-4 h-4" />
-                <span>Хөдөөний түүх</span>
+                <span>{text.ruralStory}</span>
               </div>
               {transformedPage.featured && (
                 <div className="sky-accent px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
                   <Heart className="w-4 h-4" />
-                  <span>Онцлох түүх</span>
+                  <span>{text.featuredStory}</span>
                 </div>
               )}
             </div>
@@ -118,7 +160,7 @@ export default async function Page({
                 <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center">
                   <User className="w-3 h-3 text-primary" />
                 </div>
-                <span>{transformedPage.author || "Хөдөөний хүн"}</span>
+                <span>{transformedPage.author || text.ruralPerson}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Calendar className="w-4 h-4" />
@@ -126,7 +168,9 @@ export default async function Page({
               </div>
               <div className="flex items-center space-x-2">
                 <Clock className="w-4 h-4" />
-                <span>{readingTime} мин уншина</span>
+                <span>
+                  {readingTime} {text.minRead}
+                </span>
               </div>
             </div>
           </div>
@@ -146,30 +190,40 @@ export default async function Page({
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-8">
+            <div className="sticky top-48 space-y-8">
               <div className="mongolian-card p-6">
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
-                  Түүхийн мэдээлэл
+                  {text.storyInfo}
                 </h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Түүхч</span>
+                    <span className="text-muted-foreground">
+                      {text.storyteller}
+                    </span>
                     <span className="font-medium">
-                      {transformedPage.author || "Хөдөөний хүн"}
+                      {transformedPage.author || text.ruralPerson}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Бичсэн огноо</span>
+                    <span className="text-muted-foreground">
+                      {text.publishedDate}
+                    </span>
                     <span className="font-medium">
                       {publishedDate.toLocaleDateString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Унших хугацаа</span>
-                    <span className="font-medium">{readingTime} мин</span>
+                    <span className="text-muted-foreground">
+                      {text.readingTime}
+                    </span>
+                    <span className="font-medium">
+                      {readingTime} {text.minRead.split(" ")[1] || "min"}
+                    </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Үгийн тоо</span>
+                    <span className="text-muted-foreground">
+                      {text.wordCount}
+                    </span>
                     <span className="font-medium">
                       {wordCount.toLocaleString()}
                     </span>
@@ -177,9 +231,9 @@ export default async function Page({
                 </div>
               </div>
 
-              <div className="mongolian-card p-6">
+              {/* <div className="mongolian-card p-6">
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
-                  Хуваалцах
+                  {text.share}
                 </h3>
                 <div className="flex space-x-3">
                   <button className="flex-1 steppe-button text-sm">
@@ -188,23 +242,23 @@ export default async function Page({
                   </button>
                   <button className="flex-1 bg-muted text-muted-foreground py-2 px-4 rounded-lg text-sm font-medium hover:bg-muted/80 transition-colors">
                     <Bookmark className="w-4 h-4 mr-2" />
-                    Bookmark
+                    {text.bookmark}
                   </button>
                 </div>
-              </div>
+              </div> */}
 
               <div className="mongolian-card p-6">
                 <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
-                  Бусад түүхүүд
+                  {text.otherStories}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Хөдөөний хүний амьдралын бусад түүхүүдийг уншаарай.
+                  {text.otherStoriesDesc}
                 </p>
                 <Link
-                  href="/"
-                  className="inline-block text-primary hover:text-primary/80 transition-colors font-medium flex items-center space-x-2 group"
+                  href={getLocalePath(locale)}
+                  className="text-primary hover:text-primary/80 transition-colors font-medium flex items-center space-x-2 group"
                 >
-                  <span>Бүх түүхүүд</span>
+                  <span>{text.allStories}</span>
                   <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform rotate-180" />
                 </Link>
               </div>
@@ -218,7 +272,10 @@ export default async function Page({
         attrs={{
           pageId: page.id,
           pageTitle: transformedPage.title,
-          pageUrl: `${process.env.NEXT_PUBLIC_APP_URL}/p/${transformedPage.slug}`,
+          pageUrl: `${process.env.NEXT_PUBLIC_APP_URL}${getLocalePath(
+            locale,
+            `p/${transformedPage.slug}`
+          )}`,
         }}
       />
     </article>

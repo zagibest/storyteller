@@ -19,6 +19,7 @@ export interface TransformedPage {
   last_edited_time: string;
   created_time: string;
   short_description: string;
+  province: string;
 }
 
 export const notion = new Client({ auth: process.env.NOTION_TOKEN });
@@ -74,6 +75,7 @@ export const transformPage = (page: PageObjectResponse): TransformedPage => {
     last_edited_time: last_edited_time,
     created_time: getCreatedTime(properties.Created),
     short_description: getRichTextContent(properties["Short Description"]),
+    province: getRichTextContent(properties.Province),
   };
 };
 

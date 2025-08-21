@@ -1,14 +1,47 @@
+import { type Dictionary } from "@/lib/dictionaries";
+import { getLocalePath, type Locale } from "@/lib/i18n";
 import { BookOpen, MapPin, Mountain, Users } from "lucide-react";
 import Link from "next/link";
 
-const Footer = () => {
+interface FooterProps {
+  locale: Locale;
+  dict?: Dictionary;
+}
+
+const Footer = ({ locale, dict }: FooterProps) => {
+  const footerContent = {
+    en: {
+      tagline: "Rural Life Stories",
+      storytellers: "storytellers",
+      provinces: "provinces",
+      stories: "stories",
+      description:
+        "Documenting rural life in Mongolia, preserving stories of rural people.",
+      rights: "All rights reserved",
+    },
+    mn: {
+      tagline: "Хөдөөний хүний түүх",
+      storytellers: "түүхч",
+      provinces: "аймаг",
+      stories: "түүх",
+      description:
+        "Монголын хөдөөний амьдралыг баримтлан, 'Хөдөөний хүн'-ийн түүхийг хадгалж үлдэх төсөл.",
+      rights: "Бүх эрх хуулиар хамгаалагдсан",
+    },
+  };
+
+  const content = footerContent[locale] || footerContent.mn;
+
   return (
     <footer className="bg-card/50 border-t border-border/40 mt-20">
       <div className="container mx-auto px-4 py-16">
         <div className="flex justify-center items-center gap-8">
           {/* Brand Section */}
           <div>
-            <Link href="/" className="flex items-center space-x-3 mb-6 group">
+            <Link
+              href={getLocalePath(locale)}
+              className="flex items-center space-x-3 mb-6 group"
+            >
               <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
                 <Mountain className="w-7 h-7 text-primary-foreground" />
               </div>
@@ -17,7 +50,7 @@ const Footer = () => {
                   Story-Capturers
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  Хөдөөний хүний түүх
+                  {content.tagline}
                 </p>
               </div>
             </Link>
@@ -25,15 +58,15 @@ const Footer = () => {
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Users className="w-4 h-4" />
-                <span>7 түүхч</span>
+                <span>7 {content.storytellers}</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                <span>7 аймаг</span>
+                <span>7 {content.provinces}</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <BookOpen className="w-4 h-4" />
-                <span>∞ түүх</span>
+                <span>∞ {content.stories}</span>
               </div>
             </div>
           </div>
@@ -43,7 +76,7 @@ const Footer = () => {
         <div className="border-t border-border/40 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">
-              © 2025 Story-Capturers. Бүх эрх хуулиар хамгаалагдсан.
+              © 2025 Story-Capturers. {content.rights}.
             </p>
           </div>
         </div>

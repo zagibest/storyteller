@@ -1,3 +1,5 @@
+import { type Dictionary } from "@/lib/dictionaries";
+import { getLocalePath, type Locale } from "@/lib/i18n";
 import { transformPage } from "@/lib/notion";
 import { shimmer, toBase64 } from "@/lib/utils";
 import { PageObjectResponse } from "@notionhq/client";
@@ -13,21 +15,33 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-const FeaturedCard = ({ page }: { page: PageObjectResponse }) => {
+interface FeaturedCardProps {
+  page: PageObjectResponse;
+  locale: Locale;
+  dict: Dictionary;
+}
+
+const FeaturedCard = ({ page, locale, dict }: FeaturedCardProps) => {
   const transformedPage = transformPage(page);
+
+  const featuredText = locale === "en" ? "Featured Story" : "Онцлох түүх";
+  const readFullText = locale === "en" ? "Read Full Story" : "Бүтнээр нь унших";
+  const defaultAuthor = locale === "en" ? "Rural Person" : "Хөдөөний хүн";
+  const noImageText = locale === "en" ? "No image" : "Зураг байхгүй";
+
   return (
-    <Link href={`/p/${transformedPage.slug}`}>
+    <Link href={getLocalePath(locale, `p/${transformedPage.slug}`)}>
       <div className="mongolian-card p-8 group hover:transform hover:-translate-y-1 transition-all duration-300 backdrop-blur-lg">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
               <div className="earth-accent px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
                 <Star className="w-4 h-4" />
-                <span>Онцлох түүх</span>
+                <span>{featuredText}</span>
               </div>
               <div className="flex items-center space-x-2 text-xs text-muted-foreground">
                 <MapPin className="w-3 h-3" />
-                <span>Хөдөө</span>
+                <span>{transformedPage.province}</span>
               </div>
             </div>
 
@@ -45,7 +59,7 @@ const FeaturedCard = ({ page }: { page: PageObjectResponse }) => {
                 </div>
                 <div>
                   <span className="text-foreground text-sm font-medium">
-                    {transformedPage.author || "Хөдөөний хүн"}
+                    {transformedPage.author || defaultAuthor}
                   </span>
                 </div>
               </div>
@@ -59,7 +73,7 @@ const FeaturedCard = ({ page }: { page: PageObjectResponse }) => {
 
             <div>
               <button className="steppe-button flex items-center space-x-2 group">
-                <span>Бүтнээр нь унших</span>
+                <span>{readFullText}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
@@ -84,7 +98,7 @@ const FeaturedCard = ({ page }: { page: PageObjectResponse }) => {
               <div className="w-full aspect-[4/3] bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center mongolian-pattern">
                 <div className="text-center">
                   <Mountain className="w-12 h-12 text-muted-foreground mx-auto mb-2" />
-                  <span className="text-muted-foreground">Зураг байхгүй</span>
+                  <span className="text-muted-foreground">{noImageText}</span>
                 </div>
               </div>
             )}
