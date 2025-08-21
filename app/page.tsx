@@ -1,6 +1,8 @@
 import FeaturedCard from "@/components/featured";
+import { DotPattern } from "@/components/magicui/dot-pattern";
 import PostCard from "@/components/post_card";
 import { fetchPages, getFeaturedPage } from "@/lib/notion";
+import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -9,8 +11,14 @@ export default async function Home() {
   const featuredPage = getFeaturedPage(pages);
 
   return (
-    <div className="min-h-screen bg-background">
-      <main className="container mx-auto px-4 py-16">
+    <main className="min-h-screen relative">
+      <DotPattern
+        className={cn(
+          "[mask-image:radial-gradient(1200px_circle_at_center,white,transparent)]"
+        )}
+      />
+      <div className="container mx-auto px-4 py-16 mt-20">
+        {/* <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background"></div> */}
         {featuredPage && (
           <section className="mb-16" id="stories">
             <FeaturedCard page={featuredPage} />
@@ -42,7 +50,7 @@ export default async function Home() {
             ))}
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }

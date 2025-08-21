@@ -17,7 +17,7 @@ const FeaturedCard = ({ page }: { page: PageObjectResponse }) => {
   const transformedPage = transformPage(page);
   return (
     <Link href={`/p/${transformedPage.slug}`}>
-      <div className="mongolian-card p-8 group hover:transform hover:-translate-y-1 transition-all duration-300">
+      <div className="mongolian-card p-8 group hover:transform hover:-translate-y-1 transition-all duration-300 backdrop-blur-lg">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
@@ -31,10 +31,10 @@ const FeaturedCard = ({ page }: { page: PageObjectResponse }) => {
               </div>
             </div>
 
-            <h3 className="text-3xl md:text-4xl font-serif text-foreground mb-4 leading-tight group-hover:text-primary transition-colors">
+            <h3 className="text-3xl md:text-4xl font-serif text-foreground mb-4 leading-tight  transition-colors">
               {transformedPage.title}
             </h3>
-            <p className="text-muted-foreground mb-6 leading-relaxed text-lg">
+            <p className="text-muted-foreground mb-6 leading-relaxed text-base">
               {transformedPage.short_description}
             </p>
 

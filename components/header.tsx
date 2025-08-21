@@ -1,22 +1,30 @@
+import { BookOpen, MapPin, Mountain, Users } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import { Mountain, Users, BookOpen, MapPin } from "lucide-react";
+import TrueFocus from "./TrueFocus/TrueFocus";
 
 const Header = () => {
   return (
-    <header className="border-b border-border/40 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+    <header className="border-b border-border/40 bg-card/50 backdrop-blur-sm container fixed top-8 right-1/2 translate-x-1/2 transform z-50 rounded-xl">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
-              <Mountain className="w-6 h-6 text-primary-foreground" />
-            </div>
+            <Image
+              src="/logo_square.png"
+              alt="Story Capturers"
+              width={50}
+              height={50}
+            />
+
             <div className="flex flex-col">
-              <h1 className="text-2xl font-serif text-foreground font-bold">
-                Story-Capturers
-              </h1>
-              <p className="text-xs text-muted-foreground -mt-1">
-                Хөдөөний хүний түүх
-              </p>
+              <TrueFocus
+                sentence="Story Capturers"
+                manualMode={false}
+                blurAmount={2}
+                borderColor="orange"
+                animationDuration={2}
+                pauseBetweenAnimations={1}
+              />
             </div>
           </Link>
 

@@ -2,7 +2,7 @@ import { transformPage } from "@/lib/notion";
 import { shimmer, toBase64 } from "@/lib/utils";
 import { PageObjectResponse } from "@notionhq/client";
 import dayjs from "dayjs";
-import { ArrowRight, User, MapPin, Clock } from "lucide-react";
+import { ArrowRight, Clock, MapPin, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,12 +11,12 @@ const PostCard = ({ page }: { page: PageObjectResponse }) => {
   return (
     <Link
       href={`/p/${transformedPage.slug}`}
-      className="mongolian-card p-6 group flex flex-col justify-between h-full hover:transform hover:-translate-y-1 transition-all duration-300"
+      className="mongolian-card p-6 group flex flex-col justify-between h-full hover:transform hover:-translate-y-1 transition-all duration-300 backdrop-blur-lg"
     >
       <article>
         <div className="relative mb-4 overflow-hidden rounded-lg">
           <Image
-            src={transformedPage.coverImage || ""}
+            src={transformedPage.coverImage || "/fallback.png"}
             alt={transformedPage.title}
             width={500}
             height={500}
