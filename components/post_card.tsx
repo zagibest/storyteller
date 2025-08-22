@@ -14,7 +14,7 @@ interface PostCardProps {
   dict: Dictionary;
 }
 
-const PostCard = ({ page, locale, dict }: PostCardProps) => {
+const PostCard = ({ page, locale }: PostCardProps) => {
   const transformedPage = transformPage(page);
 
   const defaultAuthor = locale === "en" ? "Rural Person" : "Хөдөөний хүн";
@@ -23,7 +23,7 @@ const PostCard = ({ page, locale, dict }: PostCardProps) => {
   return (
     <Link
       href={getLocalePath(locale, `p/${transformedPage.slug}`)}
-      className="group relative flex flex-col justify-between rounded-2xl border border-border/40 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-background/60 p-6"
+      className="group relative flex flex-col justify-between rounded-2xl border border-border/40 shadow-sm backdrop-blur-lg hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-background/60 p-6"
     >
       <article>
         {/* Cover Image */}

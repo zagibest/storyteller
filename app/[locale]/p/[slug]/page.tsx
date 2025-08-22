@@ -115,7 +115,7 @@ export default async function Page({
     <article className="min-h-screen hero-gradient ">
       {/* Hero Section */}
       <div className="relative">
-        <div className="relative container mx-auto px-4 py-16 mt-24">
+        <div className="relative container mx-auto px-4 py-16 mt-24 max-w-screen-xl">
           <Link
             href={getLocalePath(locale)}
             className="inline-flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors mb-8 group"
@@ -179,7 +179,7 @@ export default async function Page({
       </div>
 
       {/* Content Section with side rails */}
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 max-w-screen-xl">
         <div className="grid grid-cols-[auto_1fr_auto] gap-6 md:gap-8">
           {/* Left rail: vertical reading progress (sticky) */}
           <div className="hidden md:block">
@@ -191,7 +191,7 @@ export default async function Page({
           {/* Main content */}
           <div className="max-w-3xl mx-auto w-full">
             <div
-              className="story-prose animate-in fade-in-50 duration-300"
+              className="story-prose animate-in fade-in-50 duration-300 text-base"
               dangerouslySetInnerHTML={{ __html: html }}
             />
             <div className="mt-10">
@@ -218,7 +218,7 @@ export default async function Page({
         </div>
       </div>
 
-      <div className="w-full border-t border-border/40 container mx-auto px-4 my-8" />
+      <div className="w-full border-t border-border/40 container mx-auto px-4 my-8 max-w-screen-xl" />
       <CommentSection
         attrs={{
           pageId: page.id,

@@ -25,7 +25,7 @@ export default async function Home({
           "[mask-image:radial-gradient(1200px_circle_at_center,white,transparent)]"
         )}
       />
-      <div className="container mx-auto px-4 py-16 mt-20">
+      <div className="container mx-auto px-4 py-16 pt-32 max-w-screen-xl">
         {featuredPage && (
           <section className="mb-16" id="stories">
             <FeaturedCard page={featuredPage} locale={locale} dict={dict} />

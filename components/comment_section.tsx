@@ -26,7 +26,7 @@ export function CommentSection(props: {
   }, [props.attrs.pageId, props.attrs.pageTitle, props.attrs.pageUrl]);
 
   return (
-    <div className="container mx-auto px-4  rounded-2xl p-4">
+    <div className="container mx-auto px-4 rounded-2xl p-4 max-w-screen-xl">
       <div
         id="cusdis_thread"
         data-host={host}

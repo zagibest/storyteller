@@ -31,7 +31,7 @@ const FeaturedCard = ({ page, locale, dict }: FeaturedCardProps) => {
 
   return (
     <Link href={getLocalePath(locale, `p/${transformedPage.slug}`)}>
-      <div className="group relative rounded-2xl border border-border/30 shadow-md hover:shadow-xl transition-all duration-300 bg-background/70 p-8">
+      <div className="group relative rounded-2xl border border-border/30 shadow-md hover:shadow-xl transition-all duration-300 bg-background/70 p-8 backdrop-blur-lg">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left Content */}
           <div className="lg:col-span-1">

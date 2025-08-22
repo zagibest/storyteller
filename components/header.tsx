@@ -1,8 +1,11 @@
+"use client";
+
 import { type Dictionary } from "@/lib/dictionaries";
 import { getLocalePath, type Locale } from "@/lib/i18n";
 import { BookOpen, Mountain, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import LanguageSwitcher from "./language-switcher";
 import TrueFocus from "./TrueFocus/TrueFocus";
 
@@ -12,6 +15,18 @@ interface HeaderProps {
 }
 
 const Header = ({ locale, dict }: HeaderProps) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const navigationItems = {
     en: {
       stories: "Stories",
@@ -36,8 +51,14 @@ const Header = ({ locale, dict }: HeaderProps) => {
   const nav = navigationItems[locale] || navigationItems.mn;
 
   return (
-    <header className="border-b border-border/40 bg-card/50 backdrop-blur-sm container fixed top-8 right-1/2 translate-x-1/2 transform z-50 rounded-xl w-[90%] md:w-full">
-      <div className="container mx-auto px-4 py-4">
+    <header
+      className={`fixed top-4 right-1/2 translate-x-1/2 transform z-50 rounded-xl transition-all duration-300 ease-in-out w-full ${
+        isScrolled
+          ? "border border-border/40 bg-card/50 backdrop-blur-sm max-w-screen-xl"
+          : "bg-transparent max-w-screen-2xl"
+      }`}
+    >
+      <div className="mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           <Link
             href={getLocalePath(locale)}
