@@ -1,6 +1,6 @@
 import { type Dictionary } from "@/lib/dictionaries";
 import { getLocalePath, type Locale } from "@/lib/i18n";
-import { BookOpen, MapPin, Mountain, Users } from "lucide-react";
+import { BookOpen, Mountain, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import LanguageSwitcher from "./language-switcher";
@@ -20,6 +20,7 @@ const Header = ({ locale, dict }: HeaderProps) => {
       about: "About Us",
       story: "Story",
       tellers: "Tellers",
+      contact: "Contact Us",
     },
     mn: {
       stories: "Түүхүүд",
@@ -28,6 +29,7 @@ const Header = ({ locale, dict }: HeaderProps) => {
       about: "Бидний тухай",
       story: "Түүх",
       tellers: "Өгүүлэгчид",
+      contact: "Холбогдох",
     },
   };
 
@@ -70,20 +72,7 @@ const Header = ({ locale, dict }: HeaderProps) => {
               <BookOpen className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span>{nav.stories}</span>
             </Link>
-            <Link
-              href="#storytellers"
-              className="text-foreground/80 hover:text-foreground transition-colors font-medium flex items-center space-x-2 group"
-            >
-              <Users className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              <span>{nav.storytellers}</span>
-            </Link>
-            <Link
-              href="#provinces"
-              className="text-foreground/80 hover:text-foreground transition-colors font-medium flex items-center space-x-2 group"
-            >
-              <MapPin className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              <span>{nav.provinces}</span>
-            </Link>
+
             <Link
               href={getLocalePath(locale, "about")}
               className="text-foreground/80 hover:text-foreground transition-colors font-medium flex items-center space-x-2 group"
@@ -91,27 +80,31 @@ const Header = ({ locale, dict }: HeaderProps) => {
               <Mountain className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span>{nav.about}</span>
             </Link>
+            <Link
+              href={getLocalePath(locale, "contact")}
+              className="text-foreground/80 hover:text-foreground transition-colors font-medium flex items-center space-x-2 group"
+            >
+              <PhoneCall className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span>{nav.contact}</span>
+            </Link>
+            <LanguageSwitcher currentLocale={locale} />
           </nav>
 
-          <div className="flex items-center space-x-4">
-            <LanguageSwitcher currentLocale={locale} />
-
-            <button className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors">
-              <svg
-                className="w-6 h-6 text-foreground"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
+          <button className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors">
+            <svg
+              className="w-6 h-6 text-foreground"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </header>

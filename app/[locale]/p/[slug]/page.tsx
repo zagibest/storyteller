@@ -10,16 +10,9 @@ import {
 import { NotionRenderer } from "@notion-render/client";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import {
-  ArrowLeft,
-  Calendar,
-  Clock,
-  User,
-  MapPin,
-  Heart,
-  Share2,
-  Bookmark,
-} from "lucide-react";
+import { ArrowLeft, Calendar, Clock, User, MapPin, Heart } from "lucide-react";
+import { ReadingProgress } from "@/components/reading_progress";
+import { PostActions } from "@/components/post_actions";
 import Link from "next/link";
 
 dayjs.extend(relativeTime);
@@ -73,6 +66,10 @@ export default async function Page({
 
   // Format dates
   const publishedDate = new Date(transformedPage.created_time);
+  const pageUrl = `${process.env.NEXT_PUBLIC_APP_URL}${getLocalePath(
+    locale,
+    `p/${transformedPage.slug}`
+  )}`;
 
   // Translations
   const content = {
@@ -172,96 +169,50 @@ export default async function Page({
                   {readingTime} {text.minRead}
                 </span>
               </div>
+              <div className="text-muted-foreground">
+                {wordCount.toLocaleString()} words
+              </div>
+              <PostActions title={transformedPage.title} url={pageUrl} />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Content Section */}
+      {/* Content Section with side rails */}
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-          {/* Main Content */}
-          <div className="lg:col-span-3">
-            <div
-              className="story-prose "
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
+        <div className="grid grid-cols-[auto_1fr_auto] gap-6 md:gap-8">
+          {/* Left rail: vertical reading progress (sticky) */}
+          <div className="hidden md:block">
+            <div className="sticky top-40">
+              <ReadingProgress orientation="vertical" className="mx-auto" />
+            </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-48 space-y-8">
-              <div className="mongolian-card p-6">
-                <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
-                  {text.storyInfo}
-                </h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      {text.storyteller}
-                    </span>
-                    <span className="font-medium">
-                      {transformedPage.author || text.ruralPerson}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      {text.publishedDate}
-                    </span>
-                    <span className="font-medium">
-                      {publishedDate.toLocaleDateString()}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      {text.readingTime}
-                    </span>
-                    <span className="font-medium">
-                      {readingTime} {text.minRead.split(" ")[1] || "min"}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      {text.wordCount}
-                    </span>
-                    <span className="font-medium">
-                      {wordCount.toLocaleString()}
-                    </span>
-                  </div>
-                </div>
-              </div>
+          {/* Main content */}
+          <div className="max-w-3xl mx-auto w-full">
+            <div
+              className="story-prose animate-in fade-in-50 duration-300"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+            <div className="mt-10">
+              <Link
+                href={getLocalePath(locale)}
+                className="text-primary hover:text-primary/80 transition-colors font-medium inline-flex items-center space-x-2 group"
+              >
+                <span>{text.allStories}</span>
+                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform rotate-180" />
+              </Link>
+            </div>
+          </div>
 
-              {/* <div className="mongolian-card p-6">
-                <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
-                  {text.share}
-                </h3>
-                <div className="flex space-x-3">
-                  <button className="flex-1 steppe-button text-sm">
-                    <Share2 className="w-4 h-4 mr-2" />
-                    Share
-                  </button>
-                  <button className="flex-1 bg-muted text-muted-foreground py-2 px-4 rounded-lg text-sm font-medium hover:bg-muted/80 transition-colors">
-                    <Bookmark className="w-4 h-4 mr-2" />
-                    {text.bookmark}
-                  </button>
-                </div>
-              </div> */}
-
-              <div className="mongolian-card p-6">
-                <h3 className="font-serif text-lg font-semibold text-foreground mb-4">
-                  {text.otherStories}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {text.otherStoriesDesc}
-                </p>
-                <Link
-                  href={getLocalePath(locale)}
-                  className="text-primary hover:text-primary/80 transition-colors font-medium flex items-center space-x-2 group"
-                >
-                  <span>{text.allStories}</span>
-                  <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform rotate-180" />
-                </Link>
-              </div>
+          {/* Right rail: post actions (sticky) */}
+          <div className="hidden md:block">
+            <div className="sticky top-40">
+              <PostActions
+                title={transformedPage.title}
+                url={pageUrl}
+                orientation="vertical"
+              />
             </div>
           </div>
         </div>
@@ -272,10 +223,7 @@ export default async function Page({
         attrs={{
           pageId: page.id,
           pageTitle: transformedPage.title,
-          pageUrl: `${process.env.NEXT_PUBLIC_APP_URL}${getLocalePath(
-            locale,
-            `p/${transformedPage.slug}`
-          )}`,
+          pageUrl: pageUrl,
         }}
       />
     </article>
