@@ -11,7 +11,6 @@ import Link from "next/link";
 interface PostCardProps {
   page: PageObjectResponse;
   locale: Locale;
-  dict: Dictionary;
 }
 
 const PostCard = ({ page, locale }: PostCardProps) => {

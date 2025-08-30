@@ -29,7 +29,7 @@ export default async function Home({
       <div className="container mx-auto px-4 py-16 pt-32 max-w-screen-xl">
         {featuredPage && (
           <section className="mb-16" id="stories">
-            <FeaturedCard page={featuredPage} locale={locale} dict={dict} />
+            <FeaturedCard page={featuredPage} locale={locale} />
           </section>
         )}
 
@@ -52,7 +52,7 @@ export default async function Home({
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {pages?.map((page) => (
-              <PostCard key={page.id} page={page} locale={locale} dict={dict} />
+              <PostCard key={page.id} page={page} locale={locale} />
             ))}
           </div>
           <section className="mt-32">
