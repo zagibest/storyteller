@@ -45,16 +45,16 @@ function getPreferredLocale(request: NextRequest): string {
   }
 
   // Check Accept-Language header
-  const acceptLanguage = request.headers.get("Accept-Language");
-  if (acceptLanguage) {
-    // Simple parsing - look for 'en' or 'mn' in the header
-    if (acceptLanguage.includes("en")) {
-      return "en";
-    }
-    if (acceptLanguage.includes("mn")) {
-      return "mn";
-    }
-  }
+  // const acceptLanguage = request.headers.get("Accept-Language");
+  // if (acceptLanguage) {
+  //   // Simple parsing - look for 'en' or 'mn' in the header
+  //   if (acceptLanguage.includes("en")) {
+  //     return "en";
+  //   }
+  //   if (acceptLanguage.includes("mn")) {
+  //     return "mn";
+  //   }
+  // }
 
   return defaultLocale;
 }

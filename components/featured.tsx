@@ -1,4 +1,3 @@
-import { type Dictionary } from "@/lib/dictionaries";
 import { getLocalePath, type Locale } from "@/lib/i18n";
 import { transformPage } from "@/lib/notion";
 import { shimmer, toBase64 } from "@/lib/utils";
@@ -18,10 +17,9 @@ import Link from "next/link";
 interface FeaturedCardProps {
   page: PageObjectResponse;
   locale: Locale;
-  dict: Dictionary;
 }
 
-const FeaturedCard = ({ page, locale, dict }: FeaturedCardProps) => {
+const FeaturedCard = ({ page, locale }: FeaturedCardProps) => {
   const transformedPage = transformPage(page);
 
   const featuredText = locale === "en" ? "Featured Story" : "Онцлох түүх";
