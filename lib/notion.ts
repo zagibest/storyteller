@@ -3,9 +3,8 @@ import {
   Client,
   PageObjectResponse,
 } from "@notionhq/client";
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 
-// Type definition for the transformed page data
 export interface TransformedPage {
   id: string;
   title: string;
@@ -24,40 +23,58 @@ export interface TransformedPage {
 
 export const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
-export const fetchPages = cache(async () => {
-  const response = await notion.databases.query({
-    database_id: process.env.NOTION_DATABASE_ID!,
-    filter: {
-      property: "Status",
-      select: {
-        equals: "Live",
+export const fetchPages = unstable_cache(
+  async () => {
+    const response = await notion.databases.query({
+      database_id: process.env.NOTION_DATABASE_ID!,
+      filter: {
+        property: "Status",
+        select: {
+          equals: "Live",
+        },
       },
-    },
-  });
-  return response.results as PageObjectResponse[];
-});
+    });
+    return response.results as PageObjectResponse[];
+  },
+  ["pages"],
+  {
+    revalidate: 120,
+  }
+);
 
-export const fetchBySlug = cache(async (slug: string) => {
-  const response = await notion.databases.query({
-    database_id: process.env.NOTION_DATABASE_ID!,
-    filter: {
-      property: "Slug",
-      rich_text: {
-        equals: slug,
+export const fetchBySlug = unstable_cache(
+  async (slug: string) => {
+    const response = await notion.databases.query({
+      database_id: process.env.NOTION_DATABASE_ID!,
+      filter: {
+        property: "Slug",
+        rich_text: {
+          equals: slug,
+        },
       },
-    },
-  });
+    });
 
-  return response.results[0] as PageObjectResponse;
-});
+    return response.results[0] as PageObjectResponse;
+  },
+  ["page"],
+  {
+    revalidate: 120,
+  }
+);
 
-export const fetchPageBlocks = cache(async (pageId: string) => {
-  const response = await notion.blocks.children.list({
-    block_id: pageId,
-  });
+export const fetchPageBlocks = unstable_cache(
+  async (pageId: string) => {
+    const response = await notion.blocks.children.list({
+      block_id: pageId,
+    });
 
-  return response.results as BlockObjectResponse[];
-});
+    return response.results as BlockObjectResponse[];
+  },
+  ["page-blocks"],
+  {
+    revalidate: 120,
+  }
+);
 
 export const transformPage = (page: PageObjectResponse): TransformedPage => {
   const { properties, cover, url, last_edited_time, id } = page;

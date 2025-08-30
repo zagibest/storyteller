@@ -26,7 +26,7 @@ export default async function Page({
   const dict = await getDictionary(locale);
   const page = await fetchBySlug(slug);
 
-  if (!page) {
+  if (!page || !slug) {
     return (
       <div className="min-h-screen flex items-center justify-center hero-gradient">
         <div className="text-center">

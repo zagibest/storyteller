@@ -91,6 +91,14 @@ export async function generateMetadata({
     authors: [{ name: "Story-Capturers Team" }],
     creator: "Story-Capturers",
     publisher: "Story-Capturers",
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
+        { url: "/apple-touch-icon.png", sizes: "180x180" },
+        { url: "/site.webmanifest", sizes: "any" },
+      ],
+    },
     formatDetection: {
       email: false,
       address: false,
@@ -132,6 +140,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
+      {/* <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+      </head> */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} font-manrope antialiased`}
       >

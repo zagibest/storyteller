@@ -46,37 +46,50 @@
     "ourTeam": "Түүх өгүүлэгчид",
     "teamMembers": [
       {
-        "name": "Баатарсүрэн Удвал",
-        "role": "Өвөрхангай аймаг"
+        "name": "Б. Удвал",
+        "image": "/team/udval.jpg",
+        "province": "Өвөрхангай аймаг"
       },
       {
-        "name": "Ганболд Нандинсувд",
-        "role": "Баян-Өлгий аймаг"
+        "name": "Г. Нандинсувд",
+        "image": "/team/nandinsuvd.jpg",
+        "province": "Баян-Өлгий аймаг"
       },
       {
-        "name": "Наранбаатар Ариунхишиг",
-        "role": "Хөвсгөл аймаг"
+        "name": "Н. Ариунхишиг",
+        "image": "/team/ariunkhishig.jpg",
+        "province": "Хөвсгөл аймаг"
       },
       {
-        "name": "Нямдорж Халиун",
-        "role": "Дорнод аймаг"
+        "name": "Н. Халиун",
+        "image": "/team/khaliun.jpg",
+        "province": "Дорнод аймаг"
       },
       {
-        "name": "Сосорбурам Ууганзаяа",
-        "role": "Өмнөговь аймаг"
+        "name": "С. Ууганзаяа",
+        "image": "/team/uuganzaya.jpg",
+        "province": "Өмнөговь аймаг"
       },
       {
         "name": "Т. Энххүслэн",
-        "role": "Орхон аймаг"
+        "image": "/team/enkhkhuslen.jpg",
+        "province": "Орхон аймаг"
       },
       {
-        "name": "Энхбаатар Хулан",
-        "role": "Улаанбаатар аймаг"
-      },
-      {
-        "name": "Б. Баярсайхан",
-        "role": "Дорноговь аймаг"
+        "name": "Э. Хулан",
+        "image": "/team/khulan.jpeg",
+        "province": "Дорноговь аймаг"
       }
+      
     ]
+  },
+  "contact": {
+    "title": "Холбогдох",
+    "subtitle": "Манай багтай холбогдоорой.",
+    "reachUs": "Бидэнтэй холбоо барих",
+    "instagram": "Инстаграм",
+    "facebook": "Фэйсбүүк",
+    "email": "Имэйл"
   }
 }
+

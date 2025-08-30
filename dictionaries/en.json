@@ -47,37 +47,50 @@
     "ourTeam": "Story Tellers",
     "teamMembers": [
       {
-        "name": "Cami Brix",
-        "role": "Analyst"
+        "name": "B. Udval",
+        "image": "/team/udval.jpg",
+        "province": "Uvurkhangai province"
       },
       {
-        "name": "Noah Duncan",
-        "role": "Senior Analyst"
+        "name": "G. Nandinsuvd",
+        "image": "/team/nandinsuvd.jpg",
+        "province": "Bayan-Ulgii province"
       },
       {
-        "name": "Kali Finkhbayar",
-        "role": "Analyst"
+        "name": "N. Ariunkhishig",
+        "image": "/team/ariunkhishig.jpg",
+        "province": "Khuvsgul province"
       },
       {
-        "name": "Devin Haas",
-        "role": "Analyst"
+        "name": "N. Khaliun",
+        "image": "/team/khaliun.jpg",
+        "province": "Dornod province"
       },
       {
-        "name": "Hana Horiuchi",
-        "role": "Analyst"
+        "name": "S. Uuganzaya",
+        "image": "/team/uuganzaya.jpg",
+        "province": "Umnugovi province"
       },
       {
-        "name": "Davis Johnstone",
-        "role": "Analyst"
+          "name": "T. Enkhkhuslen",
+        "image": "/team/enkhkhuslen.jpg",
+        "province": "Orkhon province"
       },
       {
-        "name": "Ben Klutsky",
-        "role": "Analyst"
-      },
-      {
-        "name": "Catherine Lavity",
-        "role": "Analyst"
+        "name": "E. Khulan",
+        "image": "/team/khulan.jpeg",
+        "province": "Dornogovi province"
       }
+     
     ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with the Story-Capturers team.",
+    "reachUs": "Reach us at",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "email": "Email"
   }
 }
+

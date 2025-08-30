@@ -1,6 +1,6 @@
 import { type Dictionary } from "@/lib/dictionaries";
 import { getLocalePath, type Locale } from "@/lib/i18n";
-import { BookOpen, MapPin, Mountain, Users } from "lucide-react";
+import { Mountain } from "lucide-react";
 import Link from "next/link";
 
 interface FooterProps {
@@ -8,7 +8,7 @@ interface FooterProps {
   dict?: Dictionary;
 }
 
-const Footer = ({ locale, dict }: FooterProps) => {
+const Footer = ({ locale }: FooterProps) => {
   const footerContent = {
     en: {
       tagline: "Rural Life Stories",
@@ -49,26 +49,8 @@ const Footer = ({ locale, dict }: FooterProps) => {
                 <h3 className="text-2xl font-serif text-foreground font-bold">
                   Story-Capturers
                 </h3>
-                <p className="text-sm text-muted-foreground">
-                  {content.tagline}
-                </p>
               </div>
             </Link>
-
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <Users className="w-4 h-4" />
-                <span>7 {content.storytellers}</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <MapPin className="w-4 h-4" />
-                <span>7 {content.provinces}</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <BookOpen className="w-4 h-4" />
-                <span>∞ {content.stories}</span>
-              </div>
-            </div>
           </div>
         </div>
 
