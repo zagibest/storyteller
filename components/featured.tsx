@@ -60,7 +60,7 @@ const FeaturedCard = ({ page, locale, dict }: FeaturedCardProps) => {
             </p>
 
             {/* Author + Date */}
-            <div className="flex items-center space-x-6 mb-8">
+            <div className="flex md:gap-6 gap-4 mb-8 flex-col md:flex-row items-start md:items-center">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                   <User className="w-4 h-4 text-primary" />

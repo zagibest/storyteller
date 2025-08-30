@@ -61,7 +61,7 @@ function getPreferredLocale(request: NextRequest): string {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next)
-    "/((?!_next|api|favicon.ico|sitemap.xml|robots.txt|manifest.json|sw.js|workbox-|fallback.png|.*\\.svg|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.webp|.*\\.ico).*)",
+    // Skip all internal paths (_next), API routes, and static assets
+    "/((?!_next|api|favicon|sitemap|robots|manifest|sw|workbox-|.*\\.[a-zA-Z0-9]+$).*)",
   ],
 };
