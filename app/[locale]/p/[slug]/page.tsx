@@ -1,4 +1,6 @@
 import { CommentSection } from "@/components/comment_section";
+import { PostActions } from "@/components/post_actions";
+import { ReadingProgress } from "@/components/reading_progress";
 import { getDictionary } from "@/lib/dictionaries";
 import { getLocalePath, type Locale } from "@/lib/i18n";
 import {
@@ -10,12 +12,117 @@ import {
 import { NotionRenderer } from "@notion-render/client";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { ArrowLeft, Calendar, Clock, User, MapPin, Heart } from "lucide-react";
-import { ReadingProgress } from "@/components/reading_progress";
-import { PostActions } from "@/components/post_actions";
+import { ArrowLeft, Calendar, Clock, Heart, MapPin, User } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 dayjs.extend(relativeTime);
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string; locale: Locale }>;
+}): Promise<Metadata> {
+  const { slug, locale } = await params;
+  const page = await fetchBySlug(slug);
+
+  // Fallback metadata if page is not found
+  if (!page) {
+    const dict = await getDictionary(locale);
+    return {
+      title: dict.notFound.title,
+      description: dict.notFound.subtitle,
+    };
+  }
+
+  const transformedPage = transformPage(page);
+  const pageUrl = `${process.env.NEXT_PUBLIC_APP_URL}${getLocalePath(
+    locale,
+    `p/${transformedPage.slug}`
+  )}`;
+
+  // Use short_description or fallback
+  const metaDescription =
+    transformedPage.short_description ||
+    (locale === "en" ? "A story from Story Capturers" : "Түүх Өгүүлэгчид");
+
+  // Use cover image or fallback to default
+  const ogImage =
+    transformedPage.coverImage ||
+    transformedPage.cover ||
+    `${process.env.NEXT_PUBLIC_APP_URL}/logo_square.png`;
+
+  // Localized metadata
+  const siteTitle = locale === "en" ? "Story Capturers" : "Түүх Өгүүлэгчид";
+  const title = `${transformedPage.title} | ${siteTitle}`;
+
+  return {
+    title,
+    description: metaDescription,
+    keywords: [
+      transformedPage.province,
+      locale === "en" ? "Story Capturers" : "Түүх Өгүүлэгчид",
+      locale === "en" ? "storytelling" : "түүх өгүүлэх",
+      locale === "en" ? "rural life" : "хөдөөний амьдрал",
+      ...(transformedPage.author ? [transformedPage.author] : []),
+    ],
+    authors: transformedPage.author
+      ? [{ name: transformedPage.author }]
+      : undefined,
+    creator: transformedPage.author || siteTitle,
+    publisher: siteTitle,
+    openGraph: {
+      title,
+      description: metaDescription,
+      type: "article",
+      locale: locale === "en" ? "en_US" : "mn_MN",
+      url: pageUrl,
+      siteName: siteTitle,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: transformedPage.title,
+        },
+      ],
+      publishedTime: transformedPage.created_time,
+      modifiedTime: transformedPage.last_edited_time,
+      authors: transformedPage.author ? [transformedPage.author] : undefined,
+      section: locale === "en" ? "Story Capturers" : "Түүх Өгүүлэгчид",
+      tags: [
+        transformedPage.province,
+        locale === "en" ? "Story Capturers" : "Түүх Өгүүлэгчид",
+        locale === "en" ? "storytelling" : "түүх өгүүлэх",
+        locale === "en" ? "rural life" : "хөдөөний амьдрал",
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: metaDescription,
+      images: [ogImage],
+      creator: transformedPage.author
+        ? `@${transformedPage.author}`
+        : undefined,
+    },
+    alternates: {
+      canonical: pageUrl,
+      languages: {
+        en: pageUrl.replace(`/${locale}/`, "/en/"),
+        mn: pageUrl.replace(`/${locale}/`, "/mn/"),
+      },
+    },
+    robots: {
+      index: transformedPage.status === "Live",
+      follow: true,
+      googleBot: {
+        index: transformedPage.status === "Live",
+        follow: true,
+      },
+    },
+  };
+}
 
 export default async function Page({
   params,
@@ -224,6 +331,53 @@ export default async function Page({
           pageId: page.id,
           pageTitle: transformedPage.title,
           pageUrl: pageUrl,
+        }}
+      />
+
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: transformedPage.title,
+            description: transformedPage.short_description || text.ruralStory,
+            image:
+              transformedPage.coverImage ||
+              transformedPage.cover ||
+              `${process.env.NEXT_PUBLIC_APP_URL}/logo_square.png`,
+            author: {
+              "@type": "Person",
+              name: transformedPage.author || text.ruralPerson,
+            },
+            publisher: {
+              "@type": "Organization",
+              name: locale === "en" ? "Story Capturers" : "Түүх Өгүүлэгчид",
+              logo: {
+                "@type": "ImageObject",
+                url: `${process.env.NEXT_PUBLIC_APP_URL}/logo.png`,
+              },
+            },
+            datePublished: transformedPage.created_time,
+            dateModified: transformedPage.last_edited_time,
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": pageUrl,
+            },
+            articleSection:
+              locale === "en" ? "Rural Stories" : "Хөдөөний түүхүүд",
+            keywords: [
+              transformedPage.province,
+              locale === "en" ? "rural Mongolia" : "Монголын хөдөө",
+              locale === "en" ? "storytelling" : "түүх өгүүлэх",
+              locale === "en" ? "rural life" : "хөдөөний амьдрал",
+            ].join(", "),
+            inLanguage: locale,
+            url: pageUrl,
+            wordCount: wordCount,
+            timeRequired: `PT${readingTime}M`,
+          }),
         }}
       />
     </article>
