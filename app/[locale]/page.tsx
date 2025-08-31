@@ -39,15 +39,15 @@ export default async function Home({
               <h2 className="text-3xl font-serif text-foreground mb-2">
                 {dict.home.title}
               </h2>
-              <p className="text-muted-foreground">{dict.home.subtitle}</p>
+              {/* <p className="text-muted-foreground">{dict.home.subtitle}</p> */}
             </div>
-            <Link
+            {/* <Link
               href="#"
               className="text-primary hover:text-primary/80 transition-colors font-medium flex items-center space-x-2 group"
             >
               <span>{dict.home.allStoriesLink}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </Link> */}
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
