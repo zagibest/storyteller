@@ -48,11 +48,25 @@ export async function generateMetadata({
         description:
           "A project documenting rural life in Mongolia, preserving stories of 'Rural People'",
         locale: "en_US",
+        images: [
+          {
+            url: "/og-min.png",
+            width: 1200,
+            height: 630,
+          },
+        ],
       },
       twitter: {
         title: "Story Capturers",
         description:
           "A project documenting rural life in Mongolia, preserving stories of 'Rural People'",
+        images: [
+          {
+            url: "/og-min.png",
+            width: 1200,
+            height: 630,
+          },
+        ],
       },
     },
     mn: {
@@ -74,11 +88,25 @@ export async function generateMetadata({
         description:
           "Та манай веб сайтаас “ТҮҮХ ӨГҮҮЛЭГЧИД” хөтөлбөрт Монгол орны өнцөг булан бүрээс оролцсон залуу сурвалжлагч-сурагчид өөрсдийн орон нутаг болон тэнд аж төрж буй ард иргэдийн ахуй амьдралыг бодитоор хүүрнэн өгүүлсэн нийтлэл, бүтээлүүдийг хүлээн авч унших юм.  Суурин соёл давамгайлсан өнөөгийн нийгэмд хөдөө орон нутагт ажиллаж амьдарч буй хүмүүс амьдралын хэв маяг, ёс заншил,өв уламжлалаа хэрхэн авч явж байгааг бид уншигч та бүхэндээ хүргэх болно. Эх орныхоо бахархам бөгөөд эгэл хүмүүсийн тухай “үнэн” түүх, нийтлэлүүдийг шимтэн сонирхоорой.",
         locale: "mn_MN",
+        images: [
+          {
+            url: "/og-min.png",
+            width: 1200,
+            height: 630,
+          },
+        ],
       },
       twitter: {
         title: "Түүх Өгүүлэгчид",
         description:
           "Та манай веб сайтаас “ТҮҮХ ӨГҮҮЛЭГЧИД” хөтөлбөрт Монгол орны өнцөг булан бүрээс оролцсон залуу сурвалжлагч-сурагчид өөрсдийн орон нутаг болон тэнд аж төрж буй ард иргэдийн ахуй амьдралыг бодитоор хүүрнэн өгүүлсэн нийтлэл, бүтээлүүдийг хүлээн авч унших юм.  Суурин соёл давамгайлсан өнөөгийн нийгэмд хөдөө орон нутагт ажиллаж амьдарч буй хүмүүс амьдралын хэв маяг, ёс заншил,өв уламжлалаа хэрхэн авч явж байгааг бид уншигч та бүхэндээ хүргэх болно. Эх орныхоо бахархам бөгөөд эгэл хүмүүсийн тухай “үнэн” түүх, нийтлэлүүдийг шимтэн сонирхоорой.",
+        images: [
+          {
+            url: "/og-min.png",
+            width: 1200,
+            height: 630,
+          },
+        ],
       },
     },
   };
@@ -113,6 +141,13 @@ export async function generateMetadata({
       description: localeData.openGraph.description,
       type: "website",
       locale: localeData.openGraph.locale,
+      images: [
+        {
+          url: "/og-min.png",
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
