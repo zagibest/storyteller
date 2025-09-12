@@ -222,7 +222,7 @@ export default async function Page({
     <article className="min-h-screen hero-gradient ">
       {/* Hero Section */}
       <div className="relative">
-        <div className="relative container mx-auto px-4 py-16 mt-24 max-w-screen-xl">
+        <div className="relative container mx-auto px-4 py-16 mt-16 max-w-screen-xl">
           <Link
             href={getLocalePath(locale)}
             className="inline-flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors mb-8 group"
@@ -233,18 +233,6 @@ export default async function Page({
 
           <div className="space-y-6">
             {/* Category/Status Badge */}
-            <div className="flex items-center space-x-4">
-              <div className="earth-accent px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
-                <MapPin className="w-4 h-4" />
-                <span>{text.ruralStory}</span>
-              </div>
-              {transformedPage.featured && (
-                <div className="sky-accent px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
-                  <Heart className="w-4 h-4" />
-                  <span>{text.featuredStory}</span>
-                </div>
-              )}
-            </div>
 
             {/* Title */}
             <h1 className="text-4xl md:text-6xl font-serif font-bold text-foreground leading-tight">

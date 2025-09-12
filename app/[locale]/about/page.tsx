@@ -56,6 +56,12 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <TeamMember
+              name={{ en: "Ch. Myadaggarav", mn: "Ч. Мядаггарав" }}
+              title={{ en: "Project Manager", mn: "Төслийн санаачлагч" }}
+              image="/team/myadaggarav.jpg"
+              locale={locale}
+            />
+            <TeamMember
               name={{ en: "U. Byambanyam", mn: "У. Бямбаням" }}
               title={{ en: "Project Advisor", mn: "Төслийн Зөвлөх" }}
               description={{
@@ -77,12 +83,6 @@ export default async function AboutPage({ params }: AboutPageProps) {
               locale={locale}
             />
 
-            <TeamMember
-              name={{ en: "Ch. Myadaggarav", mn: "Ч. Мядаггарав" }}
-              title={{ en: "Project Manager", mn: "Төслийн удирдагч" }}
-              image="/team/myadaggarav.jpg"
-              locale={locale}
-            />
             <TeamMember
               name={{ en: "U. Battenerelt", mn: "У. Бат-Энэрэлт" }}
               title={{ en: "Project Moderator", mn: "Төслийн модератор" }}
