@@ -275,7 +275,7 @@ export default async function Page({
 
       {/* Content Section with side rails */}
       <div className="container mx-auto px-4 max-w-screen-xl">
-        <div className="grid grid-cols-[auto_1fr_auto] gap-6 md:gap-8">
+        <div className="grid grid-cols-[auto_1fr_auto] gap-0 md:gap-8">
           {/* Left rail: vertical reading progress (sticky) */}
           <div className="hidden md:block">
             <div className="sticky top-40">
