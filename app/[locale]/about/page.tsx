@@ -90,6 +90,12 @@ export default async function AboutPage({ params }: AboutPageProps) {
               locale={locale}
             />
             <TeamMember
+              name={{ en: "Jen Magee", mn: "Джэн Магее" }}
+              title={{ en: "Advisor", mn: "Зөвлөх" }}
+              image="/team/jen.jpeg"
+              locale={locale}
+            />
+            <TeamMember
               name={{ en: "G. Zandan-Ochir", mn: "Г. Зандан-Очир" }}
               title={{ en: "Web Developer", mn: "Веб хөгжүүлэгч" }}
               image="/team/zandanochir.jpg"
