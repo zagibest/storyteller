@@ -91,16 +91,44 @@ export default async function AboutPage({ params }: AboutPageProps) {
             />
             <TeamMember
               name={{ en: "Jen Magee", mn: "Джэн Магее" }}
-              title={{ en: "Advisor", mn: "Зөвлөх" }}
+              title={{ en: "Project Advisor", mn: "Төслийн Зөвлөх" }}
               image="/team/jen.jpeg"
               locale={locale}
             />
+            <TeamMember
+              name={{ en: "Barbara Thelamour", mn: "Барбара Тэламур" }}
+              title={{ en: "Project Advisor", mn: "Төслийн Зөвлөх" }}
+              image="/team/barbara.jpg"
+              locale={locale}
+            />
+            <TeamMember
+              name={{ en: "Carina Yervasi", mn: "Карина Эерваси" }}
+              title={{ en: "Project Advisor", mn: "Төслийн Зөвлөх" }}
+              image="/team/carina.webp"
+              locale={locale}
+            />
+            <TeamMember
+              name={{ en: "Khulan Erdenebaatar", mn: "Хулан Эрдэнэбаатар" }}
+              title={{ en: "Project Manager", mn: "Төслийн Зохицуулагч" }}
+              image="/team/khulan_pm.jpeg"
+              locale={locale}
+            />
+
             <TeamMember
               name={{ en: "G. Zandan-Ochir", mn: "Г. Зандан-Очир" }}
               title={{ en: "Web Developer", mn: "Веб хөгжүүлэгч" }}
               image="/team/zandanochir.jpg"
               locale={locale}
             />
+            {/* Барбара Тэламур -  Barbara Thelamour - Төслийн Зөвлөх - Project Advisor - Сэтгэл судлалын дэд профессор, Swarthmore College - Associate Professor, Swarthmore College 
+https://drive.google.com/file/d/1NL0PdFN0lIrFGlzBdYquLgUV8UCr7Cws/view?usp=sharing
+
+
+Карина Эерваси - Carina Yervasi - Төслийн Зөвлөх - Project Advisor - Swarthmore College-ийн Дэд профессор, Гадаад хамтын ажиллагаа хариуцсан гүйцэтгэх захирал - Associate Professor, Executive Director of Global Engagement, Swarthmore College
+https://drive.google.com/file/d/1DOK3XxzVZwHLh2VCGCJMkh7wnBJ42YVh/view?usp=sharing
+
+Хулан Эрдэнэбаатар  - Khulan Erdenebaatar - Төслийн Зохицуулагч - Program Manager  
+https://drive.google.com/file/d/1sWA3AtQcU2iUWTQTIIIPWqfNi3oUuDww/view?usp=sharing */}
           </div>
         </section>
         {/* Divider */}
