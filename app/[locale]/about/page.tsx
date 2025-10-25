@@ -120,15 +120,6 @@ export default async function AboutPage({ params }: AboutPageProps) {
               image="/team/zandanochir.jpg"
               locale={locale}
             />
-            {/* Барбара Тэламур -  Barbara Thelamour - Төслийн Зөвлөх - Project Advisor - Сэтгэл судлалын дэд профессор, Swarthmore College - Associate Professor, Swarthmore College 
-https://drive.google.com/file/d/1NL0PdFN0lIrFGlzBdYquLgUV8UCr7Cws/view?usp=sharing
-
-
-Карина Эерваси - Carina Yervasi - Төслийн Зөвлөх - Project Advisor - Swarthmore College-ийн Дэд профессор, Гадаад хамтын ажиллагаа хариуцсан гүйцэтгэх захирал - Associate Professor, Executive Director of Global Engagement, Swarthmore College
-https://drive.google.com/file/d/1DOK3XxzVZwHLh2VCGCJMkh7wnBJ42YVh/view?usp=sharing
-
-Хулан Эрдэнэбаатар  - Khulan Erdenebaatar - Төслийн Зохицуулагч - Program Manager  
-https://drive.google.com/file/d/1sWA3AtQcU2iUWTQTIIIPWqfNi3oUuDww/view?usp=sharing */}
           </div>
         </section>
         {/* Divider */}
