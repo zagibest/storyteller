@@ -5,9 +5,8 @@ import { getDictionary } from "@/lib/dictionaries";
 import { type Locale } from "@/lib/i18n";
 import { fetchPages, getFeaturedPage } from "@/lib/notion";
 import { cn, shimmer, toBase64 } from "@/lib/utils";
-import { ArrowRight, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 export default async function Home({
   params,
